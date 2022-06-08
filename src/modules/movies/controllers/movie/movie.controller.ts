@@ -3,6 +3,7 @@ import { ResponseMessage } from '../../../../common/interfaces/http.interface';
 import { MovieApplicationService } from '../../application-services/movie/movie.application-service';
 import { MovieDto } from '../../dto/movie.dto';
 import { AuthService } from '../../../../common/services/auth/auth.service';
+import { MovieEntity } from '../../entities/movie.entity';
 
 @Controller('movie')
 export class MovieController {
@@ -23,8 +24,10 @@ export class MovieController {
     return { message: 'RESPONSE.MOVIE_CREATED' };
   }
 
-  // @Get('all')
-  // public async getAll(): Promise<QuizEntity[]> {
-  //   return this.quizRepository.getAll();
-  // }
+  @Get()
+  public async getAll(): Promise<MovieEntity[]> {
+    return this.movieApplicationService.getAllByUser(
+      this.authService.getSessionToken(),
+    );
+  }
 }

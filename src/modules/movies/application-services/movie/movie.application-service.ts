@@ -42,7 +42,6 @@ export class MovieApplicationService {
   }
 
   private retrieveMovie(title: string): Promise<RetrievedMovie> {
-    // http://www.omdbapi.com/?t=zorro&apikey=7aa9208c
     const url = `${this.configService.get(
       'omdbapi.api',
     )}${title}&apikey=${this.configService.get('omdbapi.key')}`;
@@ -63,5 +62,11 @@ export class MovieApplicationService {
     if (createdMovies.length >= 5) {
       throw new ForbiddenException('ERROR.CREATION_MOVIES_LIMIT_EXCEEDED');
     }
+  }
+
+  public getAllByUser(userJwt: JwtPayload): Promise<MovieEntity[]> {
+    return this.movieRepository.find({
+      createdBy: userJwt.userId,
+    });
   }
 }
