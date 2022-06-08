@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  netguru-db:
+    image: mysql:5.7
+    volumes:
+      - "./.mysql-data/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: netguru
+      MYSQL_USER: netguru
+      MYSQL_PASSWORD: netguru!R4ndomS3cure
+      MYSQL_ROOT_PASSWORD: netguru!R4ndomS3cure
