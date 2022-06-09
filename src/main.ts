@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import * as bodyParser from 'body-parser';
 import { ConfigService } from '@nestjs/config';
 import { Logger } from 'nestjs-pino';
+import { MikroORM } from '@mikro-orm/core';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
@@ -29,10 +30,13 @@ async function bootstrap(): Promise<void> {
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   const logger = app.get(Logger);
-  app.useLogger(logger); //use nestjs-pino for app logging
+  app.useLogger(logger);
   const configService = app.get(ConfigService);
 
   await app.startAllMicroservices();
+
+  await app.get(MikroORM).getSchemaGenerator().ensureDatabase();
+  await app.get(MikroORM).getSchemaGenerator().updateSchema();
 
   await app.listen(3000);
 }
