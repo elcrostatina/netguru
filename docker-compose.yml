@@ -13,6 +13,19 @@ services:
       MYSQL_PASSWORD: netguru!R4ndomS3cure
       MYSQL_ROOT_PASSWORD: netguru!R4ndomS3cure
 
+  netguru-test-db:
+    image: mysql:5.7
+    volumes:
+      - "./.mysql-data/test-db:/var/lib/mysql"
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: netguru
+      MYSQL_USER: netguru
+      MYSQL_PASSWORD: netguru!R4ndomS3cure
+      MYSQL_ROOT_PASSWORD: netguru!R4ndomS3cure
+
   netguru-api:
     container_name: nestjs_api_dev
     image: nestjs-api-dev:1.0.0

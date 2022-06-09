@@ -34,11 +34,18 @@ import { MovieModule } from './modules/movies/movie.module';
       }),
     }),
     MikroOrmModule.forRootAsync({
-      // documentation ref: https://mikro-orm.io/docs/metadata-providers/
       providers: [ConfigService],
       inject: [ConfigService, PinoLogger],
       useFactory: (configService: ConfigService, logger: PinoLogger) => {
         logger.setContext('MikroORM');
+        console.log({
+          dbName: configService.get('database.name'),
+          host: configService.get('database.host'),
+          port: configService.get('database.port'),
+          user: configService.get('database.user'),
+          password: configService.get('database.password'),
+        });
+
         return {
           metadataProvider: TsMorphMetadataProvider,
           namingStrategy: EntityCaseNamingStrategy,
@@ -49,7 +56,6 @@ import { MovieModule } from './modules/movies/movie.module';
             path: './src/migrations',
             pattern: /^[\w-]+\d+\.js$/,
             emit: 'js',
-            // disableForeignKeys: false, //https://github.com/mikro-orm/mikro-orm/issues/190
           },
           type: 'mysql',
           dbName: configService.get('database.name'),

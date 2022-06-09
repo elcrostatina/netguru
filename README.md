@@ -5,9 +5,10 @@ Netguru take-home coding challenge
 ## Installation
 
 ```bash
-$ docker-compose up
 $ npm install
+$ docker-compose up netguru-db
 ```
+
 
 ## Running the app
 
