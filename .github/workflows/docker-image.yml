@@ -20,4 +20,4 @@ jobs:
     - name: up mysql
       run: docker-compose up -d netguru-test-db
     - run: npm ci
-    - run: npm test:e2e
+    - run: npm test
