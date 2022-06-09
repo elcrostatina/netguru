@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
+    - name: Delete mysql folder
+      run: rm -rf .mysql-data/test-db:/var/lib/mysql
     - name: up mysql
       run: docker-compose up -d netguru-test-db
     - run: npm ci
