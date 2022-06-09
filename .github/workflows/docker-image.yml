@@ -20,5 +20,4 @@ jobs:
     - name: up mysql
       run: docker-compose up -d netguru-test-db
     - run: npm ci
-    - run: npx mikro-orm migration:create --initial
     - run: npm test
