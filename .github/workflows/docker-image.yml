@@ -19,6 +19,6 @@ jobs:
         node-version: '14'
     - name: up mysql
       run: docker-compose up -d netguru-test-db
-    - run: npx mikro-orm migration:create --initial
     - run: npm ci
+    - run: npx mikro-orm migration:create --initial
     - run: npm test
