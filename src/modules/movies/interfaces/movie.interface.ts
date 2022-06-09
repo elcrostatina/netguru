@@ -1,6 +1,4 @@
 import { JwtPayload } from '../../../common/interfaces/authorization.interface';
-import { DateType, Property } from '@mikro-orm/core';
-import { MovieEntity } from '../entities/movie.entity';
 
 export interface CreationMovieHandlerParams {
   userJwt: JwtPayload;

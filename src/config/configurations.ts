@@ -16,7 +16,7 @@ export default () => ({
     },
   },
   JWT: {
-    secretKey: process.env.SECRET_KEY,
+    secretKey: process.env.JWT_SECRET,
   },
   omdbapi: {
     key: process.env.OMBD_API_KEY,
