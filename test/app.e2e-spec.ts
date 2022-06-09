@@ -83,7 +83,7 @@ describe('Movies e2e test', () => {
 
   beforeEach(async () => {
     console.log('Movie table cleaning');
-    // await movieRepository.createQueryBuilder().delete().execute();
+    await movieRepository.createQueryBuilder().delete().execute();
   });
 
   describe('Insert Movies', () => {
