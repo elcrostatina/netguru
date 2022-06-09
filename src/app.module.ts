@@ -38,13 +38,6 @@ import { MovieModule } from './modules/movies/movie.module';
       inject: [ConfigService, PinoLogger],
       useFactory: (configService: ConfigService, logger: PinoLogger) => {
         logger.setContext('MikroORM');
-        console.log({
-          dbName: configService.get('database.name'),
-          host: configService.get('database.host'),
-          port: configService.get('database.port'),
-          user: configService.get('database.user'),
-          password: configService.get('database.password'),
-        });
 
         return {
           metadataProvider: TsMorphMetadataProvider,
