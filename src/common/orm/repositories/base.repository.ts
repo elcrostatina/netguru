@@ -1,53 +1,44 @@
 import { EntityRepository } from '@mikro-orm/mysql';
-import { FilterQuery, Loaded, QueryOrderMap } from '@mikro-orm/core';
-import {
-  FindOneOptions,
-  FindOptions,
-} from '@mikro-orm/core/drivers/IDatabaseDriver';
-import { AnyEntity } from '@mikro-orm/core/typings';
+import { BaseEntity } from '../entities/base.entity';
+import { FilterQuery, Loaded, Populate, QueryOrderMap } from '@mikro-orm/core';
+import { FindOptions } from '@mikro-orm/core/drivers/IDatabaseDriver';
 
 export type WhereFilter<T> = FilterQuery<T>;
-type CreateWhereReturnType<T> = FilterQuery<T>;
 
-const createWhereFilter = <T>(
-  where?: WhereFilter<T>,
-): CreateWhereReturnType<T> => {
+const createWhereFilter = <T>(where?: WhereFilter<T>): unknown => {
   // @ts-ignore
   return { ...where, deletedAt: null };
 };
 
 export abstract class BaseRepository<
-  T extends AnyEntity<T>,
+  T extends BaseEntity,
 > extends EntityRepository<T> {
-  public findOne<P extends string = never>(
-    where: FilterQuery<T>,
-    options?: FindOneOptions<T, P>,
-    // @ts-ignore
+  public findOne<P>(
+    where: WhereFilter<T>,
+    populate?: P,
     orderBy?: QueryOrderMap,
   ): Promise<Loaded<T, P> | null> {
-    return super.findOne(createWhereFilter(where), {
-      populate: options.populate,
-      orderBy,
-    });
+    return super.findOne(createWhereFilter(where), populate, orderBy);
   }
 
-  public find<P extends string = never>(
+  public find<P extends Populate<T> = any>(
     where: WhereFilter<T>,
     options?: FindOptions<T, P>,
   ): Promise<Loaded<T, P>[]> {
     return super.find(createWhereFilter(where), options);
   }
 
-  public findAll<P extends string = never>(
+  public findAll<P extends Populate<T> = any>(
     options?: FindOptions<T, P>,
   ): Promise<Loaded<T, P>[]> {
     return super.find(createWhereFilter(), options);
   }
 
-  public findOneOrFail<P extends string = never>(
+  public findOneOrFail<P extends Populate<T> = any>(
     where: WhereFilter<T>,
-    options?: FindOneOptions<T, P>,
+    populate?: P,
+    orderBy?: QueryOrderMap,
   ): Promise<Loaded<T, P>> {
-    return super.findOneOrFail(createWhereFilter(where), options);
+    return super.findOneOrFail(createWhereFilter(where), populate, orderBy);
   }
 }
