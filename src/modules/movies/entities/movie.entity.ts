@@ -4,8 +4,9 @@ import { isInt } from '../../../common/utils/number.util';
 import { InternalServerErrorException } from '@nestjs/common';
 import { isString } from '../../../common/utils/string.util';
 import { isDate } from '../../../common/utils/date.util';
+import { MovieRepository } from '../repositories/movie/movie.repository';
 
-@Entity({ tableName: 'movies' })
+@Entity({ tableName: 'movies', customRepository: () => MovieRepository })
 export class MovieEntity extends BaseEntity {
   @Property()
   createdBy: number;
