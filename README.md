@@ -21,6 +21,6 @@ $ npm run test
 ## Api Documentation
 [https://documenter.getpostman.com/view/18326339/Uz5MFtnb](https://documenter.getpostman.com/view/18326339/Uz5MFtnb)
 ## FYI
- - I used NestJs framework and MikroORM
- - I tried to follow the DDD approach
- - I used Jest to tests the api (I tested only one api for this challenge)
+- I used NestJs framework and MikroORM
+- I tried to follow the DDD approach
+- I used Jest to tests the api (I tested only one api for this challenge)

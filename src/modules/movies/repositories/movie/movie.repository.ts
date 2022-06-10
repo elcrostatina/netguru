@@ -1,7 +1,9 @@
+import { Repository } from '@mikro-orm/core';
 import { BaseRepository } from '../../../../common/orm/repositories/base.repository';
 import { MovieEntity } from '../../entities/movie.entity';
 import { addMonths, setTime } from '../../../../common/utils/date.util';
 
+@Repository(MovieEntity)
 export class MovieRepository extends BaseRepository<MovieEntity> {
   public async getUserMovieOfMonth(params: {
     userId: number;
