@@ -72,4 +72,17 @@ import { MovieModule } from './modules/movies/movie.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private readonly orm: MikroORM) {
+    this.onApplicationBootstrap();
+  }
+
+  async onApplicationBootstrap(): Promise<void> {
+    try {
+      const migrator = this.orm.getMigrator();
+      await migrator.up();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
