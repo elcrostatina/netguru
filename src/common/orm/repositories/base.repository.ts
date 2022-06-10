@@ -22,6 +22,7 @@ export abstract class BaseRepository<
   public findOne<P extends string = never>(
     where: FilterQuery<T>,
     options?: FindOneOptions<T, P>,
+    // @ts-ignore
     orderBy?: QueryOrderMap,
   ): Promise<Loaded<T, P> | null> {
     return super.findOne(createWhereFilter(where), {
