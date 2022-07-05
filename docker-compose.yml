@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   netguru-db:
+    platform: linux/x86_64 # apple m1 fix https://stackoverflow.com/a/65592942
     image: mysql:5.7
     volumes:
       - "./.mysql-data/db:/var/lib/mysql"
@@ -14,6 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: netguru!R4ndomS3cure
 
   netguru-test-db:
+    platform: linux/x86_64
     image: mysql:5.7
     volumes:
       - "./.mysql-data/test-db:/var/lib/mysql"

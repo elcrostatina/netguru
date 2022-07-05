@@ -8,7 +8,6 @@ Netguru take-home coding challenge
 - Retrieve the jwt token
 - Run this application with the same jwt secret used previously
 ```bash
-$ npm install
 $ JWT_SECRET=foo docker-compose up netguru-api
 ```
 
