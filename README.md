@@ -23,3 +23,4 @@ $ npm run test
 - I used NestJs framework and MikroORM
 - I tried to follow the DDD approach
 - I used Jest to tests the api (I tested only one api for this challenge)
+- In a real world application Ill never push the .env file
